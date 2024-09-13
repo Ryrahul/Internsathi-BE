@@ -13,8 +13,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model Employee {
+  id             Int          @id @default(autoincrement())
+  email          String       @unique
+  name           String?
+  phone          String
+  gender         String
+  bio            String
+  skills         Json
+  city           String
+  dob            String
+  designation    String
+  address        String
+  fb_link        String
+  portfolio_link String
+  tranning       Json
+  access_token   String
+  refresh_token  String
+  experience     Experience[]
+  job_preference String[]
+  documents      Documents[]
+  Educationb     Education[]
+}
+
+model Experience {
+  id              Int      @id @default(autoincrement())
+  employee        Employee @relation(fields: [employeeId], references: [id])
+  employeeId      Int
+  designation     String
+  company_name    String
+  start_date      DateTime
+  end_date        DateTime
+  job_description String
+}
+
+model Documents {
+  id       Int      @id @default(autoincrement())
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  employeeId Int
+  type       String
+  file_key   String
+  file_url   String
+}
+
+model Education {
+  id              Int      @id @default(autoincrement())
+  employee        Employee @relation(fields: [employeeId], references: [id])
+  employeeId      Int
+  type            String
+  name            String
+  degree_name     String
+  start_date      DateTime
+  studying_here   Boolean
+  country         String
+  city            String
+  end_date        DateTime
+  job_description String
 }
