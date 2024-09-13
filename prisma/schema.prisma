@@ -97,6 +97,8 @@ model Internship {
   salary           String
   jobType          JobType
   openings         Int
+  level            String
+  description      String
   location         String
   responsibilities String[]
   requirements     String[]
