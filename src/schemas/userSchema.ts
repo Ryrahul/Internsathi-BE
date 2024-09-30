@@ -23,8 +23,8 @@ const TrainingSchema = z.object({
 export const ExperienceSchema = z.object({
   designation: z.string(),
   company_name: z.string(),
-  start_date: z.date(),
-  end_date: z.date(),
+  start_date: z.string().transform((val) => new Date(val)),
+  end_date: z.string().transform((val) => new Date(val)),
   job_description: z.string(),
 });
 
@@ -38,12 +38,11 @@ export const EducationSchema = z.object({
   type: z.string(),
   name: z.string(),
   degree_name: z.string(),
-  start_date: z.date(),
-  studying_here: z.boolean(),
+  start_date: z.string().transform((val) => new Date(val)),
   country: z.string(),
   city: z.string(),
-  end_date: z.date(),
-  job_description: z.string(),
+  end_date: z.string().transform((val) => new Date(val)),
+  studying_here: z.boolean(),
 });
 
 export const EmployeeSchema = z.object({
