@@ -27,7 +27,7 @@ model Employee {
   address        String?
   fb_link        String?
   portfolio_link String?
-  tranning       Json?
+  training       Json?
   access_token   String?
   refresh_token  String?
   experience     Experience[]

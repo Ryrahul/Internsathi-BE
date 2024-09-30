@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { Login, Signup } from "../types/user";
+import { Login, Signup } from "../types/types";
 import { Prisma } from "@prisma/client";
 import prisma from "../../prisma/prismaClient";
 import bcrypt from "bcryptjs";
-import { createToken } from "../middleware/createToken";
+import { createRefreshToken, createToken } from "../middleware/createToken";
 export const signup = async (req: Request, res: Response) => {
   const data: Signup = req.body;
 
@@ -52,15 +52,17 @@ export const login = async (req: Request, res: Response) => {
     });
   }
   const payload = { id: existingUser.id, email: existingUser.email };
-  const token = await createToken(payload);
+  const access_token = await createToken(payload);
+  const refresh_token = await createRefreshToken(payload);
   await prisma.employee.update({
     where: {
       email: data.email,
     },
     data: {
-      access_token: token,
+      access_token,
+      refresh_token,
     },
   });
 
-  return res.status(200).json({ token });
+  return res.status(200).json({ access_token, refresh_token });
 };
