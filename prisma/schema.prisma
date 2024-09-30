@@ -16,25 +16,26 @@ datasource db {
 model Employee {
   id             Int           @id @default(autoincrement())
   email          String        @unique
-  name           String?
-  phone          String
-  gender         Gender
-  bio            String
+  name           String
+  phone          String?
+  gender         Gender?
+  bio            String?
   skills         String[]
-  city           String
-  dob            String
-  designation    String
-  address        String
-  fb_link        String
-  portfolio_link String
-  tranning       Json
-  access_token   String
-  refresh_token  String
+  city           String?
+  dob            String?
+  designation    String?
+  address        String?
+  fb_link        String?
+  portfolio_link String?
+  tranning       Json?
+  access_token   String?
+  refresh_token  String?
   experience     Experience[]
   job_preference String[]
   documents      Documents[]
   education      Education[]
   application    Application[]
+  password       String
 }
 
 model Experience {
