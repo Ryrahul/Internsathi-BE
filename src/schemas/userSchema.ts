@@ -57,6 +57,4 @@ export const EmployeeSchema = z.object({
   fb_link: z.string().url().optional(),
   portfolio_link: z.string().url().optional(),
   job_preference: z.array(z.string()).optional(),
-
-  training: TrainingSchema.or(z.array(TrainingSchema)).optional(),
 });

@@ -1,10 +1,11 @@
 import express, { Express, Request, Response } from "express";
 import { authRouter, userRouter } from "./routes";
-import { jwtAuth } from "./middleware/verifyToken";
+import cors from "cors";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors());
 
 const apiRouter = express.Router();
 apiRouter.use("/auth", authRouter);
