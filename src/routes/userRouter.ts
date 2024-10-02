@@ -5,7 +5,12 @@ import {
   EmployeeSchema,
   ExperienceSchema,
 } from "../schemas/userSchema";
-import { educationDetail, profileDetails, workExperience } from "../controller";
+import {
+  details,
+  educationDetail,
+  profileDetails,
+  workExperience,
+} from "../controller";
 import { jwtAuth } from "../middleware/verifyToken";
 export const userRouter = express.Router();
 userRouter.post(
@@ -27,3 +32,5 @@ userRouter.post(
   validateData(ExperienceSchema),
   workExperience
 );
+
+userRouter.get("", jwtAuth, details);

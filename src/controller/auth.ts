@@ -16,8 +16,13 @@ export const signup = async (req: Request, res: Response) => {
         password: hashedPassword,
       },
     });
+    const payload = { id: newUser.id, email: newUser.email };
+
+    const access_token = await createRefreshToken(payload);
+    const refresh_token = await createRefreshToken(payload);
     return res.status(200).json({
-      message: `User with email ${newUser.email} registered Successfully`,
+      access_token,
+      refresh_token,
     });
   } catch (e: any) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {

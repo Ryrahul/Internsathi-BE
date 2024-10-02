@@ -14,28 +14,29 @@ datasource db {
 }
 
 model Employee {
-  id             Int           @id @default(autoincrement())
-  email          String        @unique
-  name           String
-  phone          String?
-  gender         Gender?
-  bio            String?
-  skills         String[]
-  city           String?
-  dob            String?
-  designation    String?
-  address        String?
-  fb_link        String?
-  portfolio_link String?
-  training       Json?
-  access_token   String?
-  refresh_token  String?
-  experience     Experience[]
-  job_preference String[]
-  documents      Documents[]
-  education      Education[]
-  application    Application[]
-  password       String
+  id              Int           @id @default(autoincrement())
+  email           String        @unique
+  name            String
+  phone           String?
+  gender          Gender?
+  bio             String?
+  skills          String[]
+  city            String?
+  dob             String?
+  designation     String?
+  address         String?
+  fb_link         String?
+  portfolio_link  String?
+  training        Json?
+  access_token    String?
+  refresh_token   String?
+  experience      Experience[]
+  job_preference  String[]
+  documents       Documents[]
+  education       Education[]
+  application     Application[]
+  password        String
+  profile_picture String?
 }
 
 model Experience {
@@ -60,17 +61,17 @@ model Documents {
 }
 
 model Education {
-  id            Int      @id @default(autoincrement())
-  employee      Employee @relation(fields: [employeeId], references: [id])
+  id            Int       @id @default(autoincrement())
+  employee      Employee  @relation(fields: [employeeId], references: [id])
   employeeId    Int
   type          String
   name          String
   degree_name   String
-  start_date    String
+  start_date    DateTime?
   studying_here Boolean
   country       String
   city          String
-  end_date      String
+  end_date      DateTime?
 }
 
 model Company {

@@ -89,3 +89,22 @@ export const workExperience = async (req: Request, res: Response) => {
   });
   return res.status(200).json(newExperience);
 };
+export const details = async (req: Request, res: Response) => {
+  const id = req?.user?.id;
+  const existingUser = await prisma.employee.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!existingUser) {
+    return res.status(400).json({
+      message: "No LoggedIn User",
+    });
+  }
+  return {
+    id: existingUser.id,
+    email: existingUser.email,
+    name: existingUser.name,
+    profile_picture: existingUser.profile_picture,
+  };
+};
