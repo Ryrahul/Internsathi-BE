@@ -37,3 +37,24 @@ export const getInternships = async (req: Request, res: Response) => {
     data: internships,
   });
 };
+
+export const appliedUsers = async (req: Request, res: Response) => {
+  const intershipId = req.params.id;
+  const applications = await prisma.internship.findFirst({
+    where: {
+      id: +intershipId,
+    },
+    select: {
+      Application: {
+        include: {
+          employee: true,
+        },
+      },
+    },
+  });
+  return res.status(200).send({
+    data: {
+      applications,
+    },
+  });
+};
