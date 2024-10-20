@@ -7,6 +7,8 @@ import {
   userLoginSchema,
   userRegistrationSchema,
 } from "../schemas/userSchema";
+import { CompanySchema } from "../schemas/companySchema";
+import InternshipSchema from "../schemas/internshipSchema";
 
 declare global {
   namespace Express {
@@ -19,6 +21,8 @@ declare global {
 export type Signup = z.infer<typeof userRegistrationSchema>;
 
 export type Login = z.infer<typeof userLoginSchema>;
+export type CompanySignUp = z.infer<typeof CompanySchema>;
+export type Internship = z.infer<typeof InternshipSchema>;
 
 export interface User {
   id: number;
