@@ -24,9 +24,9 @@ export const companyAuth = async (
       },
     });
     if (!existingCompany) {
-      res.status(401).json({
+      return res.status(401).json({
         error:
-          "No company linked with the account, Need to have a registered Company to add internships",
+          "No company linked with the account, Need to have a registered Company to add internships or view applicants for it",
       });
     }
     req.user = decodedToken;
