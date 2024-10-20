@@ -75,19 +75,23 @@ model Education {
 }
 
 model Company {
-  id         Int          @id @default(autoincrement())
-  about      String
-  category   String
-  company    String
-  founded    DateTime
-  location   String
-  address    String
-  website    String
-  fb_link    String
-  insta_link String
-  image_url  String[]
-  image_keys String[]
-  Internship Internship[]
+  id            Int          @id @default(autoincrement())
+  about         String
+  category      String
+  company       String
+  founded       DateTime
+  location      String
+  address       String
+  website       String
+  fb_link       String?
+  insta_link    String?
+  image_url     String[]
+  image_keys    String[]
+  Internship    Internship[]
+  email         String       @unique()
+  password      String
+  access_token  String?
+  refresh_token String?
 }
 
 model Internship {
