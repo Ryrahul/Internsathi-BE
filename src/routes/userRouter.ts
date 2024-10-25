@@ -33,4 +33,4 @@ userRouter.post(
   workExperience
 );
 
-userRouter.get("", jwtAuth, details);
+userRouter.get("/profile", jwtAuth, details);
