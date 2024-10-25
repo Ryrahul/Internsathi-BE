@@ -7,7 +7,7 @@ export const jwtAuth = (req: any, res: Response, next: NextFunction) => {
     const token: any = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
-      res.status(401).json({ error: "Unauthorized" });
+      return res.status(401).json({ error: "Unauthorized" });
     }
     const decodedToken = jwt.verify(
       token,
