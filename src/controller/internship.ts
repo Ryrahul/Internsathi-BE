@@ -1,3 +1,4 @@
+import { date } from "zod";
 import prisma from "../../prisma/prismaClient";
 import { Internship } from "../types/types";
 import { Request, Response } from "express";
@@ -27,10 +28,18 @@ export const createInternship = async (req: Request, res: Response) => {
   });
 };
 
-export const getInternships = async (req: Request, res: Response) => {
+export const getInternshipsDetails = async (req: Request, res: Response) => {
   const internships = await prisma.internship.findMany({
-    include: {
-      company: true,
+    select: {
+      position: true,
+      company: {
+        select: {
+          company_name: true,
+        },
+      },
+      responsibilities: true,
+      description: true,
+      applicationEnds: true,
     },
   });
   return res.status(200).json({
@@ -52,9 +61,37 @@ export const appliedUsers = async (req: Request, res: Response) => {
       },
     },
   });
+  if (!applications) {
+    return res.status(400).send({
+      message: "No applicants for the internship",
+    });
+  }
   return res.status(200).send({
     data: {
       applications,
+    },
+  });
+};
+
+export const getOneInternship = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const detailedInternship = await prisma.internship.findUnique({
+    where: {
+      id: +id,
+    },
+    include: {
+      company: true,
+    },
+  });
+  if (!detailedInternship) {
+    res.status(400).json({
+      message: "No details about the Internship ",
+      data: null,
+    });
+  }
+  return res.status(200).json({
+    data: {
+      detailedInternship,
     },
   });
 };

@@ -101,10 +101,11 @@ export const details = async (req: Request, res: Response) => {
       message: "No LoggedIn User",
     });
   }
-  return {
+  console.log("hereee");
+  return res.status(200).send({
     id: existingUser.id,
-    email: existingUser.email,
     name: existingUser.name,
+    email: existingUser.email,
     profile_picture: existingUser.profile_picture,
-  };
+  });
 };
