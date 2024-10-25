@@ -78,7 +78,7 @@ model Company {
   id            Int          @id @default(autoincrement())
   about         String
   category      String
-  company       String
+  company_name  String
   founded       DateTime
   location      String
   address       String
