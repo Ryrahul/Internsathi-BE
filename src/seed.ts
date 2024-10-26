@@ -51,7 +51,7 @@ async function main() {
         ],
         image_keys: ["image1-key", "image2-key"],
         email: faker.internet.email(),
-        password: "00000000", // Password set to '00000000'
+        password: "00000000",
         access_token: faker.internet.password(),
         refresh_token: faker.internet.password(),
       },
@@ -65,9 +65,9 @@ async function main() {
       data: {
         position: faker.person.jobTitle(),
         companyId: companies[i % companies.length].id,
-        salary: `${faker.number.int({ min: 1000, max: 5000 })} USD`, // Updated method
+        salary: `${faker.number.int({ min: 1000, max: 5000 })} USD`, 
         jobType: i % 2 === 0 ? "FULL_TIME" : "PART_TIME",
-        openings: faker.number.int({ min: 1, max: 5 }), // Updated method
+        openings: faker.number.int({ min: 1, max: 5 }),
         level: "Junior",
         description: faker.lorem.paragraph(),
         location: faker.location.city(),
