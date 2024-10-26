@@ -30,21 +30,12 @@ export const createInternship = async (req: Request, res: Response) => {
 
 export const getInternshipsDetails = async (req: Request, res: Response) => {
   const internships = await prisma.internship.findMany({
-    select: {
-      position: true,
-      company: {
-        select: {
-          company_name: true,
-        },
-      },
-      responsibilities: true,
-      description: true,
-      applicationEnds: true,
+    include: {
+      company: true,
     },
   });
-  return res.status(200).json({
-    data: internships,
-  });
+  console.log("hi");
+  return res.status(200).json(internships);
 };
 
 export const appliedUsers = async (req: Request, res: Response) => {

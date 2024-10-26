@@ -11,7 +11,7 @@ export const applyForInternship = async (req: Request, res: Response) => {
     },
   });
   if (existingApplications) {
-    return res.status(400).send({
+    return res.status(400).json({
       message: "Already applied for this Internship",
     });
   }
