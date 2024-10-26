@@ -20,9 +20,10 @@ export const companyAuth = async (
     ) as User;
     const existingCompany = await prisma.company.findUnique({
       where: {
-        id: decodedToken.id,
+        email: decodedToken.email,
       },
     });
+    console.log(existingCompany);
     if (!existingCompany) {
       return res.status(401).json({
         error:
