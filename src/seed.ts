@@ -9,22 +9,27 @@ async function main() {
     const employee = await prisma.employee.create({
       data: {
         email: faker.internet.email(),
-        name: faker.person.fullName(), 
+        name: faker.person.fullName(),
         phone: faker.phone.number(),
         gender: i % 2 === 0 ? "Male" : "Female",
         bio: faker.lorem.paragraph(),
-        skills: [faker.hacker.verb(), faker.hacker.noun()],
+        skills: [
+          faker.hacker.verb(),
+          faker.hacker.noun(),
+          faker.hacker.verb(),
+          faker.hacker.noun(),
+        ],
         city: faker.location.city(),
         dob: faker.date.birthdate().toISOString(),
         designation: faker.person.jobTitle(),
         address: faker.location.streetAddress(),
         fb_link: faker.internet.url(),
         portfolio_link: faker.internet.url(),
-        training: { details: faker.lorem.paragraph() },
+        training: { details: faker.lorem.paragraph(3) },
         access_token: faker.internet.password(),
         refresh_token: faker.internet.password(),
         job_preference: ["Full-time", "Remote"],
-        password: "00000000", 
+        password: "00000000",
         profile_picture:
           "https://avatars.githubusercontent.com/u/9919?s=200&v=4",
       },
@@ -36,7 +41,7 @@ async function main() {
   for (let i = 0; i < 5; i++) {
     const company = await prisma.company.create({
       data: {
-        about: faker.lorem.sentence(),
+        about: faker.lorem.sentence(3),
         category: "Technology",
         company_name: faker.company.name(),
         founded: faker.date.past(),
@@ -65,11 +70,11 @@ async function main() {
       data: {
         position: faker.person.jobTitle(),
         companyId: companies[i % companies.length].id,
-        salary: `${faker.number.int({ min: 1000, max: 5000 })} USD`, 
+        salary: `${faker.number.int({ min: 1000, max: 5000 })} USD`,
         jobType: i % 2 === 0 ? "FULL_TIME" : "PART_TIME",
         openings: faker.number.int({ min: 1, max: 5 }),
         level: "Junior",
-        description: faker.lorem.paragraph(),
+        description: faker.lorem.paragraph(3),
         location: faker.location.city(),
         responsibilities: [faker.hacker.verb(), faker.hacker.noun()],
         requirements: [faker.hacker.verb(), faker.hacker.noun()],
@@ -99,7 +104,7 @@ async function main() {
         company_name: faker.company.name(),
         start_date: faker.date.past(),
         end_date: faker.date.recent(),
-        job_description: faker.lorem.paragraph(),
+        job_description: faker.lorem.paragraph(4),
       },
     });
   }
