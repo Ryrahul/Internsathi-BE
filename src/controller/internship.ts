@@ -34,7 +34,6 @@ export const getInternshipsDetails = async (req: Request, res: Response) => {
       company: true,
     },
   });
-  console.log("hi");
   return res.status(200).json(internships);
 };
 

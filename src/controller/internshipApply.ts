@@ -15,7 +15,6 @@ export const applyForInternship = async (req: Request, res: Response) => {
       message: "Already applied for this Internship",
     });
   }
-  console.log(existingApplications);
   const applyForInternship = await prisma.application.create({
     data: {
       employeeId: userId,
