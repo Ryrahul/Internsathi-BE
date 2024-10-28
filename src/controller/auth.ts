@@ -69,5 +69,5 @@ export const login = async (req: Request, res: Response) => {
     },
   });
 
-  return res.status(200).json({ access_token, refresh_token });
+  return res.status(200).json({ access_token, refresh_token, admin: false });
 };

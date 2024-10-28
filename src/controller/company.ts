@@ -68,5 +68,26 @@ export const companyLogin = async (req: Request, res: Response) => {
     },
   });
 
-  return res.status(200).json({ access_token, refresh_token });
+  return res.status(200).json({ access_token, refresh_token, admin: true });
+};
+
+export const companyDetails = async (req: Request, res: Response) => {
+  const id = req?.user?.id;
+
+  const existingCompany = await prisma.company.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!existingCompany) {
+    return res.status(400).json({
+      message: "No LoggedIn Company",
+    });
+  }
+  return res.status(200).send({
+    id: existingCompany.id,
+    name: existingCompany.company_name,
+    email: existingCompany.email,
+    profile_picture: existingCompany.image_url[0],
+  });
 };
