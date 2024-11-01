@@ -85,3 +85,27 @@ export const getOneInternship = async (req: Request, res: Response) => {
     },
   });
 };
+
+export const myInternship = async (req: Request, res: Response) => {
+  const id = req.user?.id;
+
+  const detailedInternship = await prisma.internship.findMany({
+    where: {
+      companyId: id,
+    },
+    include: {
+      _count: {
+        select: { Application: true },
+      },
+    },
+  });
+  if (!detailedInternship) {
+    res.status(400).json({
+      message: "No Internship Posted",
+      data: null,
+    });
+  }
+  return res.status(200).json({
+    data: detailedInternship,
+  });
+};
