@@ -23,7 +23,6 @@ export const companyAuth = async (
         email: decodedToken.email,
       },
     });
-    console.log(existingCompany);
     if (!existingCompany) {
       return res.status(401).json({
         error:

@@ -9,6 +9,7 @@ export const jwtAuth = (req: any, res: Response, next: NextFunction) => {
     if (!token) {
       return res.status(401).json({ error: "Unauthorized" });
     }
+
     const decodedToken = jwt.verify(
       token,
       process.env.JWT_SECRET as string
@@ -16,6 +17,6 @@ export const jwtAuth = (req: any, res: Response, next: NextFunction) => {
     req.user = decodedToken;
     next();
   } catch (e: any) {
-    return res.json({ error: e.message });
+    return res.status(401).json({ error: e.message });
   }
 };
