@@ -32,6 +32,9 @@ export const getInternshipsDetails = async (req: Request, res: Response) => {
   const internships = await prisma.internship.findMany({
     include: {
       company: true,
+      _count: {
+        select: { Application: true },
+      },
     },
   });
   return res.status(200).json(internships);
@@ -80,9 +83,7 @@ export const getOneInternship = async (req: Request, res: Response) => {
     });
   }
   return res.status(200).json({
-    data: {
-      detailedInternship,
-    },
+    data: detailedInternship,
   });
 };
 
@@ -94,6 +95,7 @@ export const myInternship = async (req: Request, res: Response) => {
       companyId: id,
     },
     include: {
+      company: true,
       _count: {
         select: { Application: true },
       },

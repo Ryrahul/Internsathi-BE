@@ -3,6 +3,7 @@ import {
   appliedUsers,
   createInternship,
   getInternshipsDetails,
+  getOneInternship,
   myInternship,
 } from "../controller";
 import { validateData } from "../middleware/validationMiddleware";
@@ -22,3 +23,4 @@ internshipRouter.post("/apply/:id", jwtAuth, applyForInternship);
 internshipRouter.get("", jwtAuth, getInternshipsDetails);
 internshipRouter.get("/applicants/:id", companyAuth, appliedUsers);
 internshipRouter.get("/my-postings", companyAuth, myInternship);
+internshipRouter.get("/:id", companyAuth, getOneInternship);
