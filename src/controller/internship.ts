@@ -74,6 +74,14 @@ export const getOneInternship = async (req: Request, res: Response) => {
     },
     include: {
       company: true,
+      Application: {
+        select: {
+          employee: true,
+        },
+      },
+      _count: {
+        select: { Application: true },
+      },
     },
   });
   if (!detailedInternship) {
